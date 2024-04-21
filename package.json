@@ -1,18 +1,17 @@
 {
-  "name": "pkg-placeholder",
+  "name": "notypos",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@9.0.2",
   "description": "_description_",
-  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "author": "Donovan Ye <xxiaozhiyzj@gmail.com>",
   "license": "MIT",
-  "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/pkg-placeholder#readme",
+  "homepage": "https://github.com/Donovan-Ye/notypos",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/pkg-placeholder.git"
+    "url": "git+https://github.com/Donovan-Ye/notypos.git"
   },
-  "bugs": "https://github.com/antfu/pkg-placeholder/issues",
+  "bugs": "https://github.com/Donovan-Ye/notypos/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {
@@ -39,6 +38,7 @@
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
+    "play": "jiti ./src/index.ts",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
@@ -46,6 +46,11 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0",
+    "llm-provider": "^0.0.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.14.0",
@@ -55,6 +60,8 @@
     "bumpp": "^9.4.0",
     "eslint": "^9.0.0",
     "esno": "^4.7.0",
+    "glob": "^10.3.12",
+    "jiti": "^1.21.0",
     "lint-staged": "^15.2.2",
     "pnpm": "^9.0.2",
     "rimraf": "^5.0.5",
