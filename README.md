@@ -6,12 +6,14 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-_description_
+_descriptin_
 
-> **Note**:
+> **Not**:
 > Replace `pkg-placeholder`, `_description_` and `antfu` globally to use this template.
 
-## Sponsors
+## Sponsrs
+
+Hello wrold
 
 <p align="center">
   <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
@@ -23,7 +25,7 @@ _description_
 
 [MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/antfu)
 
-<!-- Badges -->
+<!-- Badgs -->
 
 [npm-version-src]: https://img.shields.io/npm/v/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
 [npm-version-href]: https://npmjs.com/package/pkg-placeholder

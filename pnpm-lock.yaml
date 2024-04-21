@@ -14,6 +14,9 @@ importers:
       commander:
         specifier: ^12.0.0
         version: 12.0.0
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       llm-provider:
         specifier: ^0.0.5
         version: 0.0.5
@@ -39,9 +42,6 @@ importers:
       esno:
         specifier: ^4.7.0
         version: 4.7.0
-      glob:
-        specifier: ^10.3.12
-        version: 10.3.12
       jiti:
         specifier: ^1.21.0
         version: 1.21.0

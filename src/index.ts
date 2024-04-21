@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import process from 'node:process'
 import { program } from 'commander'
 import chalk from 'chalk'
 import LLMProvider from 'llm-provider'
+import 'dotenv/config'
+import { getPrompt } from './prompt'
 
 async function notypes() {
-  program.option('--first').option('-s, --separator <char>')
+  program.option('--firts').option('-s, --separator <char>')
   program.parse()
 
   // const options = program.opts();
@@ -17,62 +19,94 @@ async function notypes() {
     return
   }
 
-  if (!process.env.API_KEY) {
+  if (!process.env.NOTYPOS_API_KEY) {
     console.log(
       chalk.red(
-        'API_KEY not found. Please use `export API_KEY=your-api-key` to set it. Exiting.',
+        'NOTYPOS_API_KEY not found. Please use `export NOTYPOS_API_KEY=your-api-key` to set it. Exiting.',
       ),
     )
     return
   }
 
-  if (!process.env.PROVIDER_TYPE) {
+  if (!process.env.NOTYPOS_PROVIDER_TYPE) {
     console.log(
-      chalk.yellow('PROVIDER_TYPE not found. Using default value \'openai\'.'),
+      chalk.yellow('NOTYPOS_PROVIDER_TYPE not found. Using default value \'openai\'.'),
     )
 
-    if (!process.env.MODEL) {
+    if (!process.env.NOTYPOS_MODEL) {
       console.log(
-        chalk.yellow('MODEL not found. Using default value \'gpt-3.5-turbo\'.'),
+        chalk.yellow('NOTYPOS_MODEL not found. Using default value \'gpt-3.5-turbo\'.'),
       )
     }
   }
 
   const settings = {
-    PROVIDER_TYPE: process.env.PROVIDER_TYPE || 'openai',
-    MODEL: process.env.MODEL || 'gpt-3.5-turbo',
-    API_KEY: process.env.API_KEY,
-    BASE_URL: process.env.BASE_URL,
+    NOTYPOS_PROVIDER_TYPE: process.env.NOTYPOS_PROVIDER_TYPE || 'openai',
+    NOTYPOS_MODEL: process.env.NOTYPOS_MODEL || 'gpt-3.5-turbo',
+    NOTYPOS_API_KEY: process.env.NOTYPOS_API_KEY,
+    NOTYPOS_BASE_URL: process.env.NOTYPOS_BASE_URL,
   }
 
   console.log(
     chalk.green(
       `Starting with settings: ${JSON.stringify(settings, undefined, 2)}`,
     ),
+    '\n',
   )
 
+  let total = 0
   const provider = new LLMProvider({
-    providerType: settings.PROVIDER_TYPE,
-    model: settings.MODEL,
-    apiKey: settings.API_KEY,
-    baseUrl: settings.BASE_URL,
+    providerType: settings.NOTYPOS_PROVIDER_TYPE,
+    model: settings.NOTYPOS_MODEL,
+    apiKey: settings.NOTYPOS_API_KEY,
+    baseUrl: settings.NOTYPOS_BASE_URL,
   })
 
   for (const file of files) {
-    console.log(chalk.blue(`Processing ${file}`))
+    console.log(chalk.underline(chalk.blue(`${file}`)))
 
-    const _stream = await provider.chat({
-      messages: [
-        {
-          role: 'user',
-          content: `请你找出`,
-        },
-      ],
-      stream: true,
-    })
+    try {
+      let count = 0
+      const content = readFileSync(file)?.toString()
+      const prompt = getPrompt(content.toString())
+      const res = await provider.chat({
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
+        stream: true,
+      })
+
+      let singleTypo = ''
+      for await (const message of res.content) {
+        singleTypo += message
+        if (singleTypo.includes('[END]')) {
+          const converted = singleTypo.replace(/\[END\]\n/g, '').replace(/\[END\]/g, '')
+          const typo = JSON.parse(converted)
+          const row = content.split('\n')?.findIndex(row => row.includes(typo.context))
+          const col = content.split('\n')[row]?.indexOf(typo.err)
+          console.log(`${row + 1}:${col + 1} ${typo.err} -> ${typo.correct}`)
+
+          count++
+          singleTypo = ''
+        }
+      }
+
+      if (count === 0)
+        console.log(chalk.green('No typos found.'))
+
+      total += count
+      process.stdout.write('\n')
+    }
+    catch (e) {
+      console.log(chalk.red(`Error processing ${file}`))
+      console.log(e)
+    }
   }
 
-  console.log(chalk.green('All done.'))
+  console.log(chalk.green(`All done. Found ${total} possible typos.`))
 }
 
 notypes()
