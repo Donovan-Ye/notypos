@@ -29,9 +29,9 @@ async function notypes() {
   }
 
   if (!process.env.NOTYPOS_PROVIDER_TYPE) {
-    console.log(
-      chalk.yellow('NOTYPOS_PROVIDER_TYPE not found. Using default value \'openai\'.'),
-    )
+    // console.log(
+    //   chalk.yellow('NOTYPOS_PROVIDER_TYPE not found. Using default value \'openai\'.'),
+    // )
 
     if (!process.env.NOTYPOS_MODEL) {
       console.log(
@@ -41,7 +41,9 @@ async function notypes() {
   }
 
   const settings = {
-    NOTYPOS_PROVIDER_TYPE: process.env.NOTYPOS_PROVIDER_TYPE || 'openai',
+    // NOTYPOS_PROVIDER_TYPE: process.env.NOTYPOS_PROVIDER_TYPE || 'openai',
+    // not allow to change provider for now
+    NOTYPOS_PROVIDER_TYPE: 'openai',
     NOTYPOS_MODEL: process.env.NOTYPOS_MODEL || 'gpt-3.5-turbo',
     NOTYPOS_API_KEY: process.env.NOTYPOS_API_KEY,
     NOTYPOS_BASE_URL: process.env.NOTYPOS_BASE_URL,
