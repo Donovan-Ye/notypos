@@ -1,39 +1,24 @@
-# pkg-placeholder
+# notypos
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![bundle][bundle-src]][bundle-href]
-[![JSDocs][jsdocs-src]][jsdocs-href]
-[![License][license-src]][license-href]
+This is a simple tool to find typos in a text file. It uses OpenAI to check for typos and suggests corrections.
 
-_descriptin_
+## Usage
 
-> **Not**:
-> Replace `pkg-placeholder`, `_description_` and `antfu` globally to use this template.
+1. suggest to install it globally
+```bash
+npm install -g notypos
+```
 
-## Sponsrs
+2. add your OpenAI API key to your environment variables
+```bash
+export NOTYPOS_MODEL="model-name" // default is "gpt-3.5-turbo"
+export NOTYPOS_API_KEY="api-key"
+export NOTYPOS_BASE_URL="base-url" // default is "https://api.openai.com/v1"
 
-Hello wrold
+```
+or create a `.env` file in the root of the project with the following content. Don't forget to add the `.env` file to your `.gitignore` file.
 
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
-  </a>
-</p>
-
-## License
-
-[MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/antfu)
-
-<!-- Badgs -->
-
-[npm-version-src]: https://img.shields.io/npm/v/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-version-href]: https://npmjs.com/package/pkg-placeholder
-[npm-downloads-src]: https://img.shields.io/npm/dm/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669
-[npm-downloads-href]: https://npmjs.com/package/pkg-placeholder
-[bundle-src]: https://img.shields.io/bundlephobia/minzip/pkg-placeholder?style=flat&colorA=080f12&colorB=1fa669&label=minzip
-[bundle-href]: https://bundlephobia.com/result?p=pkg-placeholder
-[license-src]: https://img.shields.io/github/license/antfu/pkg-placeholder.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/antfu/pkg-placeholder/blob/main/LICENSE
-[jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
-[jsdocs-href]: https://www.jsdocs.io/package/pkg-placeholder
+3. then run it with the path to the file you want to check
+```bash
+notypos README.md
+```
