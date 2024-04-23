@@ -11,5 +11,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "exclude": ["eslint.config.js"]
+  "exclude": ["eslint.config.js", "dist"]
 }
