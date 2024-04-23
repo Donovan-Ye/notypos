@@ -36,6 +36,7 @@
     "notypos": "bin/notypos.mjs"
   },
   "files": [
+    "bin",
     "dist"
   ],
   "scripts": {
