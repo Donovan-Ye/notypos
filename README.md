@@ -1,5 +1,9 @@
 # notypos
 
+<div align="center">
+  <img src="https://github.com/Donovan-Ye/notypos/assets/72693206/528aeba6-595a-4976-a37f-127fff9e4302" alt="Alt text" width="400" height="400">
+</div>
+
 This is a simple tool to find typos in a text file. It uses OpenAI to check for typos and suggests corrections.
 
 ## Usage
