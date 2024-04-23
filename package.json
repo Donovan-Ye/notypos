@@ -32,6 +32,9 @@
       ]
     }
   },
+  "bin": {
+    "notypos": "bin/notypos.mjs"
+  },
   "files": [
     "dist"
   ],
