@@ -12,10 +12,7 @@ dotenv.config({
 })
 
 async function notypes() {
-  program.option('--firts').option('-s, --separator <char>')
   program.parse()
-
-  // const options = program.opts();
 
   const files = program.args.filter(arg => existsSync(arg))
   if (files.length === 0) {
@@ -26,7 +23,7 @@ async function notypes() {
   if (!process.env.NOTYPOS_API_KEY) {
     console.log(
       chalk.red(
-        'NOTYPOS_API_KEY not found. Please use `export NOTYPOS_API_KEY=your-api-key` to set it. Exiting.',
+        'NOTYPOS_API_KEY not found. Please use `export NOTYPOS_API_KEY=your-api-key` to set it or add it to .env.notypos file. Exiting.',
       ),
     )
     return
@@ -45,8 +42,8 @@ async function notypes() {
   }
 
   const settings = {
-    // NOTYPOS_PROVIDER_TYPE: process.env.NOTYPOS_PROVIDER_TYPE || 'openai',
     // not allow to change provider for now
+    // NOTYPOS_PROVIDER_TYPE: process.env.NOTYPOS_PROVIDER_TYPE || 'openai',
     NOTYPOS_PROVIDER_TYPE: 'openai',
     NOTYPOS_MODEL: process.env.NOTYPOS_MODEL || 'gpt-3.5-turbo',
     NOTYPOS_API_KEY: process.env.NOTYPOS_API_KEY,
