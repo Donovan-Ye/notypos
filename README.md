@@ -20,7 +20,7 @@ export NOTYPOS_API_KEY="api-key"
 export NOTYPOS_BASE_URL="base-url" // default is "https://api.openai.com/v1"
 
 ```
-or create a `.env` file in the root of the project with the following content. Don't forget to add the `.env` file to your `.gitignore` file.
+or create a `.env.notypos` file in the root of the project with above variables. Don't forget to add the `.env.notypos` file to your `.gitignore` file.
 
 3. then run it with the path to the file you want to check
 ```bash

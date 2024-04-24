@@ -4,8 +4,12 @@ import process from 'node:process'
 import { program } from 'commander'
 import chalk from 'chalk'
 import LLMProvider from 'llm-provider'
-import 'dotenv/config'
+import dotenv from 'dotenv'
 import { getPrompt } from './prompt'
+
+dotenv.config({
+  path: '.env.notypos',
+})
 
 async function notypes() {
   program.option('--firts').option('-s, --separator <char>')
