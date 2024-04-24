@@ -1,7 +1,7 @@
 {
   "name": "notypos",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "packageManager": "pnpm@9.0.2",
   "description": "_description_",
   "author": "Donovan Ye <xxiaozhiyzj@gmail.com>",
