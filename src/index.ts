@@ -86,13 +86,19 @@ async function notypes() {
       for await (const message of res.content) {
         singleTypo += message
         if (singleTypo.includes('[END]')) {
-          const converted = singleTypo.replace(/\[END\]\n/g, '').replace(/\[END\]/g, '')
-          const typo = JSON.parse(converted)
-          const row = content.split('\n')?.findIndex(row => row.includes(typo.context))
-          const col = content.split('\n')[row]?.indexOf(typo.err)
-          console.log(`${row + 1}:${col + 1} ${typo.err} -> ${typo.correct}`)
+          try {
+            const converted = singleTypo.replace(/\[END\]\n/g, '').replace(/\[END\]/g, '')
+            const typo = JSON.parse(converted)
+            const row = content.split('\n')?.findIndex(row => row.includes(typo.context))
+            const col = content.split('\n')[row]?.indexOf(typo.err)
+            console.log(`${row + 1}:${col + 1} ${typo.err} -> ${typo.correct}`)
 
-          count++
+            count++
+          }
+          catch (e) {
+            // It is possible that GPT returned an string in the error format that JSON.parse can not process. Just ignore it.
+          }
+
           singleTypo = ''
         }
       }
