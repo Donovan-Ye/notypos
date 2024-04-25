@@ -1,7 +1,7 @@
 const fixTyposPrompt = `
-Please identify any typos and grammatical errors in the given content as much as possible, don't worry about making mistakes.
+Please identify any typos and grammatical errors in the given content as much as possible.
 Reply with the context, incorrect content, and correct content in the format of "{"context": "context", "err": "incorrect content", "correct": "correct content"}".
-Please ensure that the context contains whole original line in order to accurately determine the position.
+Ensure the context include the entire line.
 Add [END] after each error and continue.
 
 <Example>
